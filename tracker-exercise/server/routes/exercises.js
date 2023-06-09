@@ -24,4 +24,29 @@ exerciseRouter.post('/add',(req,res) => {
         .catch(err => res.status(400).json('error:' + err))
 });
 
+exerciseRouter.get('/:id', (req,res) => {
+    Exercise.findById(req.params.id)
+        .then(exercise => res.json(exercise))
+        .catch(err => res.status(400).json('Error:' +err));
+});
+
+exerciseRouter.patch('/:id' , (req,res) => { 
+    Exercise.findByIdAndUpdate(req.params.id)
+        .then(exercise =>  { 
+            exercise.userName = req.body.userName;
+            exercise.duration = Number(req.body.duration);
+            exercise.description = req.body.description;
+            exercise.date = Date.parse(req.body.date);
+            exercise.save()
+                .then(() => res.json('exercise updated'))
+                .catch(err => res.status(400).json(err))
+        }).catch(err => res.status(400).json('Error' + err));
+});
+
+exerciseRouter.delete('/:id' , (req,res) => {
+    Exercise.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Exercise Deleted Successfully '))
+    .catch(err => res.status(400).json('Error :' + err ))
+})
+
 module.exports = exerciseRouter;
