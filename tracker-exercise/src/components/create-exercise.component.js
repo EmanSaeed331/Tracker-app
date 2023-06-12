@@ -111,6 +111,7 @@ export default class CreateExercise extends Component {
                             />
                         </div>
                     </div>
+                    <br/>
                     <div className="form-group">
                         <input type="submit" value="Create Exercise Log " className="btn btn-primary"/>
                     </div>
