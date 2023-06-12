@@ -13,6 +13,7 @@ function App() {
 
 
     <Router>
+      <div className='container'>
       <Nav/>
       <br/>
       <Routes>
@@ -21,6 +22,7 @@ function App() {
       <Route path="/create" exact Component={CreateExercise} />
       <Route path="/user" exact Component={CreateUser} />
       </Routes>
+      </div>
     </Router>
  
   );
