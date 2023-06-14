@@ -15,7 +15,7 @@ class EditExercise extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     
         this.state = {
-          username: '',
+            userName: '',
           description: '',
           duration: 0,
           date: new Date(),
@@ -26,7 +26,7 @@ class EditExercise extends Component {
         axios.get('http://localhost:5000/exercises/'+this.props.params.id)
           .then(response => {
             this.setState({
-              username: response.data.username,
+              userName: response.data.userName,
               description: response.data.description,
               duration: response.data.duration,
               date: new Date(response.data.date)
@@ -42,6 +42,7 @@ class EditExercise extends Component {
               this.setState({
                 users: response.data.map(user => user.userName),
               })
+              console.log(`response.data ${response.data[0]}`)
             }
           })
           .catch((error) => {
@@ -52,7 +53,7 @@ class EditExercise extends Component {
     
       onChangeUsername(e) {
         this.setState({
-          username: e.target.value
+          userName: e.target.value
         })
       }
     
@@ -78,7 +79,7 @@ class EditExercise extends Component {
         e.preventDefault();
     
         const exercise = {
-          username: this.state.username,
+          userName: this.state.userName,
           description: this.state.description,
           duration: this.state.duration,
           date: this.state.date
@@ -86,10 +87,10 @@ class EditExercise extends Component {
     
         console.log(exercise);
     
-        axios.post('http://localhost:5000/exercises/update/' + this.props.params.id, exercise)
+        axios.patch('http://localhost:5000/exercises/'+this.props.params.id, exercise)
           .then(res => console.log(res.data));
     
-        window.location = '/';
+       // window.location = '/';
       }
     
       render() {
@@ -102,7 +103,7 @@ class EditExercise extends Component {
               <select ref="userInput"
                   required
                   className="form-control"
-                  value={this.state.username}
+                  value={this.state.userName}
                   onChange={this.onChangeUsername}>
                   {
                     this.state.users.map(function(user) {
