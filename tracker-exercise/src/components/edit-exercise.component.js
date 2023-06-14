@@ -90,7 +90,7 @@ class EditExercise extends Component {
         axios.patch('http://localhost:5000/exercises/'+this.props.params.id, exercise)
           .then(res => console.log(res.data));
     
-       // window.location = '/';
+        window.location = '/';
       }
     
       render() {
