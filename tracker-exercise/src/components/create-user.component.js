@@ -29,7 +29,7 @@ export default class CreateUser extends Component {
             username:''
         })
 
-       // window.location = '/';
+        window.location = '/';
 
     }
   
